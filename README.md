@@ -53,4 +53,4 @@ Set up build using Tanzu Build Service. Set your current context to the Shared S
 kp image create world <your docker registry>/hello --namespace build-service --git https://github.com/cepage/hello
 kp image create world <your docker registry>/world --namespace build-service --git https://github.com/cepage/world
 ```
-The <registry>/hello and <registry>/world paths should match the image names you entered when you customized the ``deployment.yaml`` files in your forked repos.
+The ``<registry>/hello`` and ``<registry>/world`` paths should match the image names you entered when you customized the ``deployment.yaml`` files in your forked repos.
