@@ -48,9 +48,42 @@ Customize your fork of the repos for your environment:
 * Update your version of the files hello-config/base/deployment.yaml and world-config/base/deployment.yaml. Each of these files specifies an image name that uses the registry prefix **harbor-lab.pks.corby.cc/development**. Replace the prefix with the docker registry/project that you will be using.
 * Update your version of the files hello-config/dev/httpproxy.yaml and hello-config/staging/httpproxy.yaml. Each of these files specify a FQDN that uses the base domain **contour.tkg.corby.cc**. Replace the base domain portion with the wildcard domain that you created during Contour installation (e.g. hello.apps.mydomain.com)
 
+### Build Service
+
 Set up build using Tanzu Build Service. Set your current context to the Shared Services Cluster, and run the following:
 ```
 kp image create world <your docker registry>/hello --namespace build-service --git https://github.com/cepage/hello
 kp image create world <your docker registry>/world --namespace build-service --git https://github.com/cepage/world
 ```
 The ``<registry>/hello`` and ``<registry>/world`` paths should match the image names you entered when you customized the ``deployment.yaml`` files in your forked repos.
+
+This will kick off builds of the hello and world microservices. You can check the status of the builds with the following commands:
+```
+kp build logs hello -b 1
+kp build logs world -b 1
+```
+
+### ArgoCD
+
+Log into ArgoCD, and click the New App button in the Upper Left corner. Fill out the following fields:
+> Application Name: hello-dev<br>
+> Project: default<br>
+> Repository URL: [Your forked version of the hello-config Github Repo]<br>
+> Path: dev<br>
+
+Hit the Create Button. Repeat the process and create the following 3 additional apps:
+
+> Application Name: world-dev<br>
+> Project: default<br>
+> Repository URL: [Your forked version of the world-config Github Repo]<br>
+> Path: dev<br>
+
+> Application Name: hello-staging<br>
+> Project: default<br>
+> Repository URL: [Your forked version of the hello-config Github Repo]<br>
+> Path: staging<br>
+
+> Application Name: world-staging<br>
+> Project: default<br>
+> Repository URL: [Your forked version of the world-config Github Repo]<br>
+> Path: staging<br>
