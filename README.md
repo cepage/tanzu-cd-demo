@@ -89,8 +89,13 @@ Hit the Create Button. Repeat the process and create the following 3 additional 
 > Path: staging<br>
 
 Your apps will now show on the home page as "Out of Sync" (assuming you selected the default Manual Sync Policy):<br>
-<img src="https://raw.githubusercontent.com/cepage/tanzu-cd-demo/master/images/argo-out-of-sync.png" width="561" height="420">
+<img src="https://raw.githubusercontent.com/cepage/tanzu-cd-demo/master/images/argo-out-of-sync.png" width="375" height="280">
 
 Press the Sync button on the app, and ArgoCD will deploy to your Kubernetes cluster, to match the configuration defined in your forked config repos. Once all four apps have been synced, you can visit the FQDNs that you specified in your Contour HttpProxy configurations, and see the running Dev and Staging deployments of the application:<br>
 <img src="https://raw.githubusercontent.com/cepage/tanzu-cd-demo/master/images/hello-dev.png" width="480" height="140">
+
+### Modify the Deployment
+
+The Hello-World application consists of two microservices, Hello and World, which are configured and deployed independently of each other. The Hello microservice is a web app that displays a message, using a text color that is a configuration parameter to the microservice. It receives the message text by invoking an endpoint of the World microservice. The World microservice returns the message text, which is a configuration parameter for that service:
+<img src="https://raw.githubusercontent.com/cepage/tanzu-cd-demo/master/images/hello-world.png"?
 
