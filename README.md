@@ -89,8 +89,8 @@ Hit the Create Button. Repeat the process and create the following 3 additional 
 > Path: staging<br>
 
 Your apps will now show on the home page as "Out of Sync" (assuming you selected the default Manual Sync Policy):
-![Out of Sync](images/argo-out-of-sync.png)
+<img src="https://raw.githubusercontent.com/cepage/tanzu-cd-demo/master/images/argo-out-of-sync.png" width="561" height="420">
 
 Press the Sync button on the app, and ArgoCD will deploy to your Kubernetes cluster, to match the configuration defined in your forked config repos. Once all four apps have been synced, you can visit the FQDNs that you specified in your Contour HttpProxy configurations, and see the running Dev and Staging deployments of the application:
-![Hello-Dev](images/hello-dev.png)
+<img src="https://raw.githubusercontent.com/cepage/tanzu-cd-demo/master/images/hello-dev.png" width="717" height="210">
 
