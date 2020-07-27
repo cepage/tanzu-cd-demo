@@ -103,3 +103,28 @@ The Hello-World application consists of two microservices, Hello and World, whic
 <br><br>Our changes will be specific to the dev (not staging) deployment of our application. Go to the **dev/configmap.yaml** file in your hello-config repo, and change the web.color parameter from **DarkGoldenrod** to **Violet**. Then, go to the **dev/configmap.yaml** file in your world-config repo, and change the message.text parameter from **Development Land** to **Deployment City**. Commit these changes to your Git Repo.
 <br><br>Now go back to the hello-dev and the world-dev applications in ArgoCD. You might have to hit the "refresh" button on these apps first, but ArgoCD will now register these apps as "Out of Sync". The ConfigMaps in your running deployments no longer match what is specified in your Git Repos. Press Sync for each of these applications, and ArgoCD will redeploy them, injecting new ConfigMaps. Visit the FQDN for your Dev deployment to observe the changes:
 <img src="https://raw.githubusercontent.com/cepage/tanzu-cd-demo/master/images/config-changes.png" width="480" height="140">
+
+# Apply policy with Tanzu Mission Control
+
+Log into Tanzu Mission Control. We will create a Workspace to set policies on our deployments. From the Workspace sidebar menu, select Create Workspace, and name your new workspace **hello-world**:
+<img src="https://raw.githubusercontent.com/cepage/tanzu-cd-demo/master/images/create-workspace.png">
+
+Next, go to the Clusters sidebar menu, select your Workload cluster, and then select the Namespaces top-level menu. Check the 2 namespaces that are being used for the dev and staging deployments, as defined in your config repo, and then select "Attach 2 namespaces":
+<img src="https://raw.githubusercontent.com/cepage/tanzu-cd-demo/master/images/attach-namespaces.png">
+A pop-up menu will ask you to choose which workspace to assign these namespaces to. Select the **hello-world** workspace you just created:
+<img src="https://raw.githubusercontent.com/cepage/tanzu-cd-demo/master/images/select-workspace.png">
+
+<br><br>Now, go to the Workspaces sidebar menu, and click on the hello-world workspace. In the top-right corner, you will see an "Actions" drop-down menu. Select "View Policies":
+<img src="https://raw.githubusercontent.com/cepage/tanzu-cd-demo/master/images/view-policies.png">
+
+We are going to define a policy that only allows images to be deployed from the trusted registry that Tanzu Build Service publishes to, and presents the execution of arbitrary, untrusted code. In the top-level menu on the Policies screen, select "Image Registry". Click the link that says "Create Image Registry Policy". Enter a name "trusted-registry" for the policy, and for "Image Registry Patterns", put the DNS name of your Docker Registry that Build Service publishes to:
+<img src="https://raw.githubusercontent.com/cepage/tanzu-cd-demo/master/images/image-registry.png">
+
+The hello and world microservices can continue to run in these namespaces, because their images were created by Tanzu Build Service and live in the trusted registry. But let's see what happens when we try to run untrusted code. Set the current context of your kubectl config to the hello-world-dev namespace. Then execute the following command:
+```
+kubectl run nginx --image=marketplace.gcr.io/google/nginx1
+```
+The pod will fail to start, with the following message:
+```
+Error from server (failed to match image policies: spec.containers[0].image: Forbidden: no matching image policy): admission webhook "validation.policies.tmc.cloud.vmware.com" denied the request: failed to match image policies: spec.containers[0].image: Forbidden: no matching image policy
+```
