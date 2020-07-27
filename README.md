@@ -97,5 +97,5 @@ Press the Sync button on the app, and ArgoCD will deploy to your Kubernetes clus
 ### Modify the Deployment
 
 The Hello-World application consists of two microservices, Hello and World, which are configured and deployed independently of each other. The Hello microservice is a web app that displays a message, using a text color that is a configuration parameter to the microservice. It receives the message text by invoking an endpoint of the World microservice. The World microservice returns the message text, which is a configuration parameter for that service:
-<img src="https://raw.githubusercontent.com/cepage/tanzu-cd-demo/master/images/hello-world.png"?
+<img src="https://raw.githubusercontent.com/cepage/tanzu-cd-demo/master/images/hello-world.png">
 
