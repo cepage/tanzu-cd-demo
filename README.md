@@ -94,8 +94,11 @@ Your apps will now show on the home page as "Out of Sync" (assuming you selected
 Press the Sync button on the app, and ArgoCD will deploy to your Kubernetes cluster, to match the configuration defined in your forked config repos. Once all four apps have been synced, you can visit the FQDNs that you specified in your Contour HttpProxy configurations, and see the running Dev and Staging deployments of the application:<br>
 <img src="https://raw.githubusercontent.com/cepage/tanzu-cd-demo/master/images/hello-dev.png" width="480" height="140">
 
-### Modify the Deployment
+# Modify the Deployment
 
 The Hello-World application consists of two microservices, Hello and World, which are configured and deployed independently of each other. The Hello microservice is a web app that displays a message, using a text color that is a configuration parameter to the microservice. It receives the message text by invoking an endpoint of the World microservice. The World microservice returns the message text, which is a configuration parameter for that service:
 <img src="https://raw.githubusercontent.com/cepage/tanzu-cd-demo/master/images/hello-world.png">
 
+<br>By modifying your hello-config and world-config repos, you can make changes to deployment settings such as the number of deployment replicas, the FQDN URL of your application, or the application-specific config parameters. For this example, we will update the ConfigMaps, because the changes are easily observable.
+<br>Our changes will be specific to the dev (not staging) deployment of our application. Go to the **dev/configmap.yaml** file in your hello-config repo, and change the web.color parameter from **DarkGoldenrod** to **Violet**. Then, go to the **dev/configmap.yaml** file in your world-config repo, and change the message.text parameter from **Development Land** to **Deployment City**. Commit these changes to your Git Repo.
+<br>Now go back to the hello-dev and the world-dev applications in ArgoCD. You might have to hit the "refresh" button on these apps first, but ArgoCD will now register these apps as "Out of Sync". The ConfigMaps in your running deployments no longer match what is specified in your Git Repos. Press Sync for each of these applications, and ArgoCD will redeploy them, injecting new ConfigMaps. Visit the FQDN for your Dev deployment to observe the changes:
