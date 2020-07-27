@@ -107,18 +107,19 @@ The Hello-World application consists of two microservices, Hello and World, whic
 # Apply policy with Tanzu Mission Control
 
 Log into Tanzu Mission Control. We will create a Workspace to set policies on our deployments. From the Workspace sidebar menu, select Create Workspace, and name your new workspace **hello-world**:
-<img src="https://raw.githubusercontent.com/cepage/tanzu-cd-demo/master/images/create-workspace.png">
+<img src="https://raw.githubusercontent.com/cepage/tanzu-cd-demo/master/images/create-workspace.png" width="50%">
 
 Next, go to the Clusters sidebar menu, select your Workload cluster, and then select the Namespaces top-level menu. Check the 2 namespaces that are being used for the dev and staging deployments, as defined in your config repo, and then select "Attach 2 namespaces":
-<img src="https://raw.githubusercontent.com/cepage/tanzu-cd-demo/master/images/attach-namespaces.png">
-A pop-up menu will ask you to choose which workspace to assign these namespaces to. Select the **hello-world** workspace you just created:
-<img src="https://raw.githubusercontent.com/cepage/tanzu-cd-demo/master/images/select-workspace.png">
+<img src="https://raw.githubusercontent.com/cepage/tanzu-cd-demo/master/images/attach-namespaces.png" width="50%">
 
-<br><br>Now, go to the Workspaces sidebar menu, and click on the hello-world workspace. In the top-right corner, you will see an "Actions" drop-down menu. Select "View Policies":
-<img src="https://raw.githubusercontent.com/cepage/tanzu-cd-demo/master/images/view-policies.png">
+A pop-up menu will ask you to choose which workspace to assign these namespaces to. Select the **hello-world** workspace you just created:
+<img src="https://raw.githubusercontent.com/cepage/tanzu-cd-demo/master/images/select-workspace.png" width="50%">
+
+Now, go to the Workspaces sidebar menu, and click on the hello-world workspace. In the top-right corner, you will see an "Actions" drop-down menu. Select "View Policies":
+<img src="https://raw.githubusercontent.com/cepage/tanzu-cd-demo/master/images/view-policies.png" width="50%">
 
 We are going to define a policy that only allows images to be deployed from the trusted registry that Tanzu Build Service publishes to, and presents the execution of arbitrary, untrusted code. In the top-level menu on the Policies screen, select "Image Registry". Click the link that says "Create Image Registry Policy". Enter a name "trusted-registry" for the policy, and for "Image Registry Patterns", put the DNS name of your Docker Registry that Build Service publishes to:
-<img src="https://raw.githubusercontent.com/cepage/tanzu-cd-demo/master/images/image-registry.png">
+<img src="https://raw.githubusercontent.com/cepage/tanzu-cd-demo/master/images/image-registry.png" width="50%">
 
 The hello and world microservices can continue to run in these namespaces, because their images were created by Tanzu Build Service and live in the trusted registry. But let's see what happens when we try to run untrusted code. Set the current context of your kubectl config to the hello-world-dev namespace. Then execute the following command:
 ```
