@@ -112,7 +112,7 @@ Log into Tanzu Mission Control. We will create a Workspace to set policies on ou
 Next, go to the Clusters sidebar menu, select your Workload cluster, and then select the Namespaces top-level menu. Check the 2 namespaces that are being used for the dev and staging deployments, as defined in your config repo, and then select "Attach 2 namespaces":
 <img src="https://raw.githubusercontent.com/cepage/tanzu-cd-demo/master/images/attach-namespaces.png" width="50%">
 
-A pop-up menu will ask you to choose which workspace to assign these namespaces to. Select the **hello-world** workspace you just created:
+A pop-up menu will ask you to choose which workspace to assign these namespaces to. Select the **hello-world** workspace you just created:<br>
 <img src="https://raw.githubusercontent.com/cepage/tanzu-cd-demo/master/images/select-workspace.png" width="50%">
 
 Now, go to the Workspaces sidebar menu, and click on the hello-world workspace. In the top-right corner, you will see an "Actions" drop-down menu. Select "View Policies":
