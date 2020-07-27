@@ -116,7 +116,7 @@ A pop-up menu will ask you to choose which workspace to assign these namespaces 
 <img src="https://raw.githubusercontent.com/cepage/tanzu-cd-demo/master/images/select-workspace.png" width="50%">
 
 Now, go to the Workspaces sidebar menu, and click on the hello-world workspace. In the top-right corner, you will see an "Actions" drop-down menu. Select "View Policies":
-<img src="https://raw.githubusercontent.com/cepage/tanzu-cd-demo/master/images/view-policies.png" width="50%">
+<img src="https://raw.githubusercontent.com/cepage/tanzu-cd-demo/master/images/view-policies.png" width="33%">
 
 We are going to define a policy that only allows images to be deployed from the trusted registry that Tanzu Build Service publishes to, and presents the execution of arbitrary, untrusted code. In the top-level menu on the Policies screen, select "Image Registry". Click the link that says "Create Image Registry Policy". Enter a name "trusted-registry" for the policy, and for "Image Registry Patterns", put the DNS name of your Docker Registry that Build Service publishes to:
 <img src="https://raw.githubusercontent.com/cepage/tanzu-cd-demo/master/images/image-registry.png" width="50%">
